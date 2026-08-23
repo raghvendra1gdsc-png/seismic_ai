@@ -1,0 +1,45 @@
+{
+  "nominal_prediction": 0.008521525556069737,
+  "noise_experiments": {
+    "noise_2%": {
+      "noise_sigma": 0.02,
+      "mean_prediction": 0.008523890910624951,
+      "std_prediction": 0.0001346637946799843,
+      "percentile_5": 0.008340470450677692,
+      "percentile_95": 0.008782983953180494,
+      "coeff_of_variation": 0.01579839489875769
+    },
+    "noise_5%": {
+      "noise_sigma": 0.05,
+      "mean_prediction": 0.008534750956563218,
+      "std_prediction": 0.00030474010665740536,
+      "percentile_5": 0.008073349433544803,
+      "percentile_95": 0.009031162299554689,
+      "coeff_of_variation": 0.035705799525768286
+    },
+    "noise_10%": {
+      "noise_sigma": 0.1,
+      "mean_prediction": 0.008618855061791355,
+      "std_prediction": 0.0005728374654063164,
+      "percentile_5": 0.007838580116204585,
+      "percentile_95": 0.00964438832674119,
+      "coeff_of_variation": 0.06646329022816368
+    },
+    "noise_15%": {
+      "noise_sigma": 0.15,
+      "mean_prediction": 0.008729649960432505,
+      "std_prediction": 0.0007829695304995925,
+      "percentile_5": 0.007584573214199843,
+      "percentile_95": 0.010069481326553237,
+      "coeff_of_variation": 0.08969082770196214
+    },
+    "noise_20%": {
+      "noise_sigma": 0.2,
+      "mean_prediction": 0.00880031653580533,
+      "std_prediction": 0.0009593581480425026,
+      "percentile_5": 0.00737037835377382,
+      "percentile_95": 0.010474246007940533,
+      "coeff_of_variation": 0.10901405013549441
+    }
+  }
+}

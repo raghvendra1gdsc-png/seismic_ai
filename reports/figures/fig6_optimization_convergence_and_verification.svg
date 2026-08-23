@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" width="1000" height="540">
+<rect width="100%" height="100%" fill="#0B0F19"/>
+<defs></defs>
+<text x="40.0" y="35.0" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="bold" fill="#F8FAFC" text-anchor="start">Figure 6: Surrogate Design Optimization &amp; Closed-Loop Physics Audit</text>
+<text x="40.0" y="58.0" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="normal" fill="#94A3B8" text-anchor="start">Evolutionary stiffness minimization under Kobe 1995 earthquake verified against Phase 1 Newmark solver</text>
+<rect x="50.0" y="80.0" width="440.0" height="420.0" fill="#1E293B" stroke="#334155" stroke-width="1" rx="8"/>
+<text x="70.0" y="110.0" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" fill="#F8FAFC" text-anchor="start">Differential Evolution Loss Minimization</text>
+<text x="70.0" y="128.0" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="normal" fill="#94A3B8" text-anchor="start">30 Generations (1,050 Evaluations in 0.42 seconds)</text>
+<rect x="100.0" y="150.0" width="360.0" height="280.0" fill="#0F172A" stroke="#475569" stroke-width="1" rx="0"/>
+<polyline points="100.0,165.0 112.0,165.0 124.0,227.9 136.0,227.9 148.0,414.9 160.0,414.9 172.0,414.9 184.0,414.9 196.0,414.9 208.0,414.9 220.0,414.9 232.0,414.9 244.0,414.9 256.0,414.9 268.0,414.9 280.0,414.9 292.0,414.9 304.0,414.9 316.0,414.9 328.0,414.9 340.0,414.9 352.0,414.9 364.0,414.9 376.0,414.9 388.0,415.0 400.0,415.0 412.0,415.0 424.0,415.0 436.0,415.0 448.0,415.0 460.0,415.0" fill="none" stroke="#38BDF8" stroke-width="2.5" opacity="1.0"/>
+<circle cx="100.0" cy="165.0" r="4.0" fill="#38BDF8" stroke="#0F172A" stroke-width="1" opacity="1.0"/>
+<circle cx="160.0" cy="414.9" r="4.0" fill="#38BDF8" stroke="#0F172A" stroke-width="1" opacity="1.0"/>
+<circle cx="220.0" cy="414.9" r="4.0" fill="#38BDF8" stroke="#0F172A" stroke-width="1" opacity="1.0"/>
+<circle cx="280.0" cy="414.9" r="4.0" fill="#38BDF8" stroke="#0F172A" stroke-width="1" opacity="1.0"/>
+<circle cx="340.0" cy="414.9" r="4.0" fill="#38BDF8" stroke="#0F172A" stroke-width="1" opacity="1.0"/>
+<circle cx="400.0" cy="415.0" r="4.0" fill="#38BDF8" stroke="#0F172A" stroke-width="1" opacity="1.0"/>
+<circle cx="460.0" cy="415.0" r="4.0" fill="#38BDF8" stroke="#0F172A" stroke-width="1" opacity="1.0"/>
+<text x="100.0" y="448.0" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="normal" fill="#94A3B8" text-anchor="start">Gen 0</text>
+<text x="460.0" y="448.0" font-family="system-ui, -apple-system, sans-serif" font-size="9" font-weight="normal" fill="#94A3B8" text-anchor="end">Gen 30</text>
+<rect x="510.0" y="80.0" width="440.0" height="420.0" fill="#1E293B" stroke="#334155" stroke-width="1" rx="8"/>
+<text x="530.0" y="110.0" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" fill="#F8FAFC" text-anchor="start">Closed-Loop Physics Verification Audit</text>
+<text x="530.0" y="128.0" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="normal" fill="#94A3B8" text-anchor="start">Re-simulation in Phase 1 Newmark Solver (Zero Hallucination)</text>
+<rect x="530.0" y="160.0" width="400.0" height="55.0" fill="#0F172A" stroke="#334155" stroke-width="1" rx="6"/>
+<text x="545.0" y="184.0" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="normal" fill="#94A3B8" text-anchor="start">Allowable Drift Limit (Code)</text>
+<text x="915.0" y="196.0" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="bold" fill="#94A3B8" text-anchor="end">1.00%</text>
+<rect x="530.0" y="230.0" width="400.0" height="55.0" fill="#0F172A" stroke="#334155" stroke-width="1" rx="6"/>
+<text x="545.0" y="254.0" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="normal" fill="#94A3B8" text-anchor="start">Surrogate Predicted PIDR</text>
+<text x="915.0" y="266.0" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="bold" fill="#F59E0B" text-anchor="end">1.20%</text>
+<rect x="530.0" y="300.0" width="400.0" height="55.0" fill="#0F172A" stroke="#334155" stroke-width="1" rx="6"/>
+<text x="545.0" y="324.0" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="normal" fill="#94A3B8" text-anchor="start">Physics Re-Simulated PIDR</text>
+<text x="915.0" y="336.0" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="bold" fill="#10B981" text-anchor="end">0.70%</text>
+<rect x="530.0" y="370.0" width="400.0" height="55.0" fill="#0F172A" stroke="#334155" stroke-width="1" rx="6"/>
+<text x="545.0" y="394.0" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="normal" fill="#94A3B8" text-anchor="start">Peak Base Shear Force</text>
+<text x="915.0" y="406.0" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="bold" fill="#38BDF8" text-anchor="end">8596.7 kN</text>
+<rect x="530.0" y="440.0" width="400.0" height="45.0" fill="#064E3B" stroke="#10B981" stroke-width="1" rx="6"/>
+<text x="730.0" y="468.0" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="bold" fill="#6EE7B7" text-anchor="middle">VERIFIED SAFE: True Physics Drift 0.70% &lt;= 1.00% Limit</text>
+</svg>

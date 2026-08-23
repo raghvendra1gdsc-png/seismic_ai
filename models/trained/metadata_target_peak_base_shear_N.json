@@ -1,0 +1,40 @@
+{
+  "target_name": "target_peak_base_shear_N",
+  "feature_columns": [
+    "num_storeys",
+    "total_mass_kg",
+    "total_height_m",
+    "fundamental_period_T1_s",
+    "period_T2_s",
+    "period_T3_s",
+    "period_ratio_T2_T1",
+    "first_mode_mass_ratio",
+    "first_mode_participation",
+    "avg_storey_mass_kg",
+    "avg_storey_stiffness_N_m",
+    "base_stiffness_N_m",
+    "stiffness_taper_ratio",
+    "damping_ratio",
+    "pga_g",
+    "pgv_m_s",
+    "pgd_m",
+    "arias_intensity_m_s",
+    "significant_duration_s",
+    "mean_period_Tm_s",
+    "predominant_period_Tp_s",
+    "Sa_T1_g",
+    "Sa_T2_g",
+    "Sa_T3_g",
+    "Sd_T1_m",
+    "Sa_over_PGA",
+    "T1_over_Tp",
+    "T1_over_Tm",
+    "static_drift_proxy"
+  ],
+  "models": [
+    "LinearRidge",
+    "RandomForest",
+    "GradientBoosting",
+    "NeuralMLP"
+  ]
+}
