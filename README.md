@@ -1,6 +1,7 @@
 # 🏛️ Seismic-AI: Physics-Informed Neural Dynamics & Cyber-Physical Early Response System
 
-[![Tests](https://img.shields.io/badge/tests-74%20passing-brightgreen.svg)](tests/)
+[![Tests](https://img.shields.io/badge/tests-77%20passing-brightgreen.svg)](tests/)
+[![gstack](https://img.shields.io/badge/gstack-integrated-blueviolet.svg)](.gstack/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](requirements.txt)
 [![Backend](https://img.shields.io/badge/backend-FastAPI-009688.svg)](app/backend/)
 [![Frontend](https://img.shields.io/badge/frontend-Streamlit-FF4B4B.svg)](app/frontend/)
@@ -168,12 +169,27 @@ seismic-ai/
 pip install -r requirements.txt
 ```
 
-### 2. Run All 74 Unit Tests
+### 2. Run All 77 Unit Tests
 ```bash
 pytest -v
 ```
 
-### 3. Launch Services
+### 3. gstack AI Workflow Automation
+```bash
+# Multi-persona code and mechanics review (EM, Researcher, Security)
+python scripts/gstack.py review
+
+# Run full automated QA verification suite
+python scripts/gstack.py qa
+
+# Run pre-flight release and git readiness checklist
+python scripts/gstack.py ship
+
+# Strategic problem framing (YC Office Hours style)
+python scripts/gstack.py office-hours
+```
+
+### 4. Launch Services
 ```bash
 # Terminal 1: Backend
 uvicorn app.backend.main:app --host 0.0.0.0 --port 8000 --reload
@@ -194,3 +210,4 @@ Access the dashboard at `http://localhost:8501` (or on your phone/LAN via `http:
 - 🏢 [SAC Steel & IIT Benchmark Validation](docs/benchmark_validation.md)
 - 🎤 [Faculty Interview Slide Deck & Defense Guide](docs/presentation_guide.md)
 - 🖼️ [Conference Poster Layout Guide](docs/poster_guide.md)
+

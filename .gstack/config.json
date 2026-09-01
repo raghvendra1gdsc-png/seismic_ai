@@ -1,0 +1,27 @@
+{
+  "name": "gstack-seismic-ai",
+  "version": "1.0.0",
+  "description": "gstack virtual engineering team & workflow automation framework for Seismic-AI",
+  "author": "Garry Tan / Seismic-AI Research Initiative",
+  "default_persona": "eng_manager",
+  "personas": [
+    "ceo",
+    "eng_manager",
+    "researcher",
+    "qa_lead",
+    "security_officer"
+  ],
+  "workflows": [
+    "office-hours",
+    "plan-review",
+    "review",
+    "qa",
+    "ship"
+  ],
+  "quality_gates": {
+    "min_test_count": 74,
+    "require_clean_git": true,
+    "max_acceptable_inference_ms": 1.0,
+    "required_standards": ["IS 1893:2016", "ASCE 7-22", "FEMA P-58"]
+  }
+}
