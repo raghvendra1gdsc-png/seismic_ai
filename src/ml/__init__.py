@@ -8,6 +8,7 @@ from src.ml.models import (
     GradientBoostingSurrogate,
     NeuralSurrogate,
 )
+from src.ml.pinn import PhysicsInformedSurrogate
 from src.ml.evaluate import compute_regression_metrics, benchmark_speedup
 from src.ml.train import SurrogateSuite, train_surrogate_suite
 
@@ -18,6 +19,7 @@ __all__ = [
     "RandomForestSurrogate",
     "GradientBoostingSurrogate",
     "NeuralSurrogate",
+    "PhysicsInformedSurrogate",
     "compute_regression_metrics",
     "benchmark_speedup",
     "SurrogateSuite",
