@@ -601,3 +601,87 @@ async def run_nsga2_optimization(
         },
     }
 
+
+# =============================================================================
+# LIVE GLOBAL SEISMICITY & LOCAL NETWORK ALARM BROADCAST ENDPOINTS
+# =============================================================================
+
+from src.earthquake.live_feed import GlobalSeismicityFeed
+from src.sensors.alarm import LocalNetworkAlarmService
+
+global_feed = GlobalSeismicityFeed()
+alarm_service = LocalNetworkAlarmService()
+
+
+@app.get("/earthquakes/live-global")
+async def get_live_global_earthquakes(
+    feed_type: str = "all_day",
+    min_magnitude: float = 2.5,
+    max_events: int = 25,
+) -> Dict[str, Any]:
+    """Fetch active global seismic events from USGS real-time GeoJSON streams."""
+    events = global_feed.fetch_live_events(
+        feed_type=feed_type,
+        min_magnitude=min_magnitude,
+        max_events=max_events,
+    )
+    return {
+        "status": "success",
+        "feed_type": feed_type,
+        "total_active_events": len(events),
+        "events": [
+            {
+                "event_id": e.event_id,
+                "place": e.place,
+                "magnitude": e.magnitude,
+                "mag_type": e.mag_type,
+                "depth_km": e.depth_km,
+                "latitude": e.latitude,
+                "longitude": e.longitude,
+                "time_str": e.time_str,
+                "alert_level": e.alert_level,
+                "felt_reports": e.felt_reports,
+                "tsunami_flag": e.tsunami_flag,
+                "usgs_url": e.usgs_url,
+            }
+            for e in events
+        ],
+    }
+
+
+@app.post("/alarm/broadcast")
+async def broadcast_emergency_alarm(
+    early_pga_g: float = 0.15,
+    predicted_drift_pct: float = 0.95,
+    lead_time_s: float = 12.0,
+    building_name: str = "Campus_Main_Building",
+    is_drill_test: bool = False,
+) -> Dict[str, Any]:
+    """Broadcast an early-warning alarm payload to local network subscribers."""
+    payload = alarm_service.create_alarm_payload(
+        early_pga_g=early_pga_g,
+        predicted_drift_pct=predicted_drift_pct,
+        lead_time_s=lead_time_s,
+        building_name=building_name,
+        is_test=is_drill_test,
+    )
+    dispatch_status = alarm_service.broadcast_to_local_network(payload)
+    return {
+        "status": "success",
+        "alarm_payload": payload.to_dict(),
+        "local_network_dispatch": dispatch_status,
+        "active_subscribers_count": len(alarm_service.subscribers),
+    }
+
+
+@app.post("/alarm/subscribers")
+async def register_alarm_subscriber(webhook_url: str) -> Dict[str, Any]:
+    """Register a local device/buzzer webhook on the LAN."""
+    added = alarm_service.register_subscriber(webhook_url)
+    return {
+        "status": "success" if added else "already_registered",
+        "webhook_url": webhook_url,
+        "total_subscribers": len(alarm_service.subscribers),
+    }
+
+

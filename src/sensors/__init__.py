@@ -1,4 +1,4 @@
-"""Real-time sensor streaming, Hardware Abstraction Layer (HAL), STA/LTA onset picking, and rapid damage estimation."""
+"""Real-time sensor streaming, Hardware Abstraction Layer (HAL), STA/LTA onset picking, alarm broadcasting, and damage estimation."""
 
 from src.sensors.stream import SensorStream, AccelerationSample, OnsetTriggerEvent
 from src.sensors.replay import ReplaySensor
@@ -19,6 +19,10 @@ from src.sensors.damage_index import (
     ParkAngDamageEvaluator,
     DamageEvaluationResult,
 )
+from src.sensors.alarm import (
+    LocalNetworkAlarmService,
+    AlarmBroadcastPayload,
+)
 
 __all__ = [
     "SensorStream",
@@ -37,4 +41,6 @@ __all__ = [
     "DigitalSignalConditioner",
     "ParkAngDamageEvaluator",
     "DamageEvaluationResult",
+    "LocalNetworkAlarmService",
+    "AlarmBroadcastPayload",
 ]
