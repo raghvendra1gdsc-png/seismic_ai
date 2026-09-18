@@ -116,13 +116,13 @@ def create_presentation(output_path: str = "reports/presentation/seismic_ai_pres
     tb_auth = s1.shapes.add_textbox(Inches(1.1), Inches(5.0), Inches(11.1), Inches(1.4))
     tf_a = tb_auth.text_frame
     p_a1 = tf_a.paragraphs[0]
-    p_a1.text = "Candidate: Rahul  |  Focus Area: Computational Mechanics, PBEE & Surrogate ML"
+    p_a1.text = "Candidate: Raghvendra Singh Gahlot  |  Civil Engineering, MBM University"
     p_a1.font.size = Pt(14)
     p_a1.font.bold = True
     p_a1.font.color.rgb = ACCENT_CYAN
 
     p_a2 = tf_a.add_paragraph()
-    p_a2.text = "Target Review: Department of Civil Engineering, Indian Institute of Technology Delhi (IIT Delhi)"
+    p_a2.text = "Contact: raghvendra1gdsc@gmail.com  |  GitHub: github.com/raghvendra1gdsc-png"
     p_a2.font.size = Pt(13)
     p_a2.font.color.rgb = TEXT_MUTED
 
@@ -466,7 +466,7 @@ def create_presentation(output_path: str = "reports/presentation/seismic_ai_pres
     # ==========================================================
     s12 = prs.slides.add_slide(blank_layout)
     set_slide_background(s12)
-    add_header(s12, "Conclusions & Proposed Research at IIT Delhi")
+    add_header(s12, "Conclusions & Proposed Research Directions")
 
     add_card(s12, Inches(0.8), Inches(1.6), Inches(5.7), Inches(5.2), "Key Research Contributions")
     tb12_1 = s12.shapes.add_textbox(Inches(1.0), Inches(2.2), Inches(5.3), Inches(4.4))
@@ -477,7 +477,7 @@ def create_presentation(output_path: str = "reports/presentation/seismic_ai_pres
     p.font.size = Pt(11.5)
     p.font.color.rgb = TEXT_LIGHT
 
-    add_card(s12, Inches(6.8), Inches(1.6), Inches(5.7), Inches(5.2), "Proposed Internship Extensions at IIT Delhi")
+    add_card(s12, Inches(6.8), Inches(1.6), Inches(5.7), Inches(5.2), "Proposed Internship Research Directions")
     tb12_2 = s12.shapes.add_textbox(Inches(7.0), Inches(2.2), Inches(5.3), Inches(4.4))
     tf12_2 = tb12_2.text_frame
     tf12_2.word_wrap = True

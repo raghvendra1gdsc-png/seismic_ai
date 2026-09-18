@@ -1,8 +1,9 @@
 # Research Poster: Seismic-AI
 ## AI-Accelerated Seismic Response Prediction and Design Optimization of Multi-Storey Buildings
 
-**Author**: Rahul (Civil & Structural Engineering Research Internship Applicant)  
-**Affiliation**: Department of Civil Engineering, Indian Institute of Technology Delhi (IIT Delhi)  
+**Author**: Raghvendra Singh Gahlot (2nd Year B.Tech, Civil Engineering)  
+**Affiliation**: Department of Civil Engineering, MBM University  
+**Contact**: raghvendra1gdsc@gmail.com | [github.com/raghvendra1gdsc-png](https://github.com/raghvendra1gdsc-png)  
 
 ---
 
@@ -65,5 +66,5 @@ Tier 4: Dual-Blind Unseen (Unseen EQ + Unseen Bldgs) --> R² = 0.9425 (GBDT)
 
 ---
 
-### [CONCLUSION & IIT DELHI RESEARCH FIT]
+### [CONCLUSION & RESEARCH INTERNSHIP FIT]
 Seismic-AI provides a rigorous, verified foundation for performance-based computational earthquake engineering, bridging theoretical structural dynamics with accelerated data-driven surrogate modeling.

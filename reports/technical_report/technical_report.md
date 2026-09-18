@@ -1,9 +1,9 @@
 # Seismic-AI: Physics-Informed Machine Learning Surrogate Models for Accelerated Multi-Storey Seismic Response Prediction and Design Optimization
 
-**Author**: Rahul (Candidate for Research Internship)  
-**Target Reviewer**: Structural Engineering Faculty, Department of Civil Engineering, IIT Delhi  
-**Date**: August 2026  
-**Repository**: [github.com/rahul/seismic-ai](https://github.com/rahul/seismic-ai)  
+**Author**: Raghvendra Singh Gahlot (2nd Year Civil Engineering, MBM University)  
+**Target Reviewer**: Structural Engineering & Computational Mechanics Faculty  
+**Email**: raghvendra1gdsc@gmail.com | **GitHub**: [github.com/raghvendra1gdsc-png](https://github.com/raghvendra1gdsc-png)  
+**Repository**: [github.com/raghvendra1gdsc-png/seismic_ai](https://github.com/raghvendra1gdsc-png/seismic_ai)  
 
 ---
 

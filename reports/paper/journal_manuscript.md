@@ -1,8 +1,9 @@
 # Physics-Informed Neural Surrogates and Nonlinear Inelastic Dynamics for Accelerated Seismic Demand Prediction, Probabilistic Fragility Analysis, and Resilient Multi-Objective Design
 
 **Authors:**  
-*Structural Dynamics & Computational Mechanics Research Initiative*  
-Department of Civil Engineering & Department of Applied Mechanics, Indian Institute of Technology (IIT) Delhi  
+**Raghvendra Singh Gahlot**  
+Department of Civil Engineering, MBM University  
+Email: raghvendra1gdsc@gmail.com | GitHub: [github.com/raghvendra1gdsc-png](https://github.com/raghvendra1gdsc-png)  
 
 **Target Journals:**  
 - *ASCE Journal of Structural Engineering*  
@@ -20,7 +21,7 @@ Nonlinear Time-History Analysis (NLTHA) is the gold standard for performance-bas
 5. An **NSGA-II Multi-Objective Resilient Optimizer** discovering the Pareto frontier between initial embodied material carbon/mass and expected seismic loss/drift.
 6. A rigorous **4-Tier Scientific Generalization Protocol** evaluated across dual-blind unseen earthquakes and unseen structural topologies, supplemented with distribution-free conformal prediction intervals and Sobol' global variance sensitivity analysis.
 
-The framework is validated against published benchmarks from the SAC Steel Project (FEMA-355C) and IIT campus structures under authentic Indian strong-motion records from **PESMOS (IIT Roorkee)** and the **National Centre for Seismology (NCS)**, demonstrating research-grade fidelity, mechanical interpretability, and practical field utility.
+The framework is validated against published benchmarks from the SAC Steel Project (FEMA-355C) and multi-storey RC benchmark structures under authentic Himalayan and active tectonic strong-motion records from **PESMOS** and the **National Centre for Seismology (NCS)**, demonstrating research-grade fidelity, mechanical interpretability, and practical field utility.
 
 ---
 

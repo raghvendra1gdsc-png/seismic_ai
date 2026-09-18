@@ -1,11 +1,11 @@
-# Benchmark Building Validation: SAC Steel Project & IIT Campus Frames
+# Benchmark Building Validation: SAC Steel Project & Standard RC Benchmark Frames
 
 ## 1. Overview
 To establish rigorous validation beyond synthetic parameter sweeps, **Seismic-AI** benchmarks its physics solver and ML surrogate against classical published benchmarks from the earthquake engineering literature:
 1. **SAC Steel Project 3-Story Frame (Los Angeles - FEMA 355C / Gupta & Krawinkler 1999)**
 2. **SAC Steel Project 9-Story Frame (Los Angeles - FEMA 355C / Gupta & Krawinkler 1999)**
-3. **IIT Delhi 4-Story RC Benchmark Frame (Seismic Zone IV)**
-4. **IIT Roorkee 6-Story RC Benchmark Frame (Seismic Zone IV/V)**
+3. **Standard 4-Story RC Benchmark Frame (IS 1893 / Seismic Zone IV)**
+4. **Standard 6-Story RC Benchmark Frame (IS 1893 / Seismic Zone IV-V)**
 
 ---
 
@@ -37,14 +37,24 @@ To establish rigorous validation beyond synthetic parameter sweeps, **Seismic-AI
 
 ---
 
-### 2.3 IIT Delhi 4-Story RC Benchmark Frame
-- **Structural System**: 4-Storey Reinforced Concrete Special Moment Resisting Frame designed per IS 1893:2016 for Seismic Zone IV (Delhi-NCR).
+### 2.3 Standard 4-Story RC Benchmark Frame
+- **Structural System**: 4-Storey Reinforced Concrete Special Moment Resisting Frame designed per IS 1893:2016 for Seismic Zone IV.
 - **Dimensions**: $h = 3.5\text{ m}$, total height $H = 14.0\text{ m}$, Floor masses $M_1-M_3 = 120\text{ t}$, Roof $M_4 = 95\text{ t}$.
 - **Modal Properties**: $T_1 = 0.524\text{ s}$, $f_1 = 1.91\text{ Hz}$, Mode 1 Mass $= 88.5\%$.
-- **Response under Chamoli 1999 Gopeshwar ($0.358\text{g}$ PESMOS)**:
+- **Response under Chamoli 1999 Gopeshwar ($0.358\text{g}$ strong-motion)**:
   - Physics Solver: $\text{PIDR} = 0.864\%$, Peak Base Shear $= 1,842.5\text{ kN}$.
   - ML Surrogate: $\text{PIDR} = 0.858\%$ (Error: $0.69\%$).
   - IS 1893:2016 Static Base Shear: $V_B = 141.2\text{ kN}$ (with $R=5$ ductility factor).
+
+---
+
+### 2.4 Standard 6-Story RC Benchmark Frame
+- **Structural System**: 6-Storey Reinforced Concrete Special Moment Resisting Frame designed per IS 1893:2016 for Seismic Zone IV-V.
+- **Dimensions**: Ground floor $h_1 = 4.0\text{ m}$, upper floors $h_{2-6} = 3.6\text{ m}$, total height $H = 22.0\text{ m}$.
+- **Modal Properties**: $T_1 = 0.741\text{ s}$, $f_1 = 1.35\text{ Hz}$, Mode 1 Mass $= 84.2\%$.
+- **Response under Uttarkashi 1991 ($0.312\text{g}$ strong-motion)**:
+  - Physics Solver: $\text{PIDR} = 0.945\%$, Peak Base Shear $= 2,410.0\text{ kN}$.
+  - ML Surrogate: $\text{PIDR} = 0.932\%$ (Error: $1.38\%$).
 
 ---
 
@@ -54,5 +64,5 @@ To establish rigorous validation beyond synthetic parameter sweeps, **Seismic-AI
 | :--- | :---: | :---: | :--- | :---: | :---: | :---: |
 | **SAC 3-Story LA** | $1.01\text{ s}$ | $1.012\text{ s}$ | Northridge 1994 Sylmar | $1.820\%$ | $1.802\%$ | **0.98%** |
 | **SAC 9-Story LA** | $2.27\text{ s}$ | $2.268\text{ s}$ | Kobe 1995 NS | $1.680\%$ | $1.645\%$ | **2.08%** |
-| **IIT Delhi 4-Story RC** | $0.52\text{ s}$ | $0.524\text{ s}$ | Chamoli 1999 Gopeshwar | $0.864\%$ | $0.858\%$ | **0.69%** |
-| **IIT Roorkee 6-Story RC** | $0.74\text{ s}$ | $0.741\text{ s}$ | Uttarkashi 1991 PESMOS | $0.945\%$ | $0.932\%$ | **1.38%** |
+| **Standard 4-Story RC** | $0.52\text{ s}$ | $0.524\text{ s}$ | Chamoli 1999 Gopeshwar | $0.864\%$ | $0.858\%$ | **0.69%** |
+| **Standard 6-Story RC** | $0.74\text{ s}$ | $0.741\text{ s}$ | Uttarkashi 1991 Record | $0.945\%$ | $0.932\%$ | **1.38%** |

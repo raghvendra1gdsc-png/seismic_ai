@@ -2,7 +2,7 @@
 
 **Presentation File**: `reports/presentation/seismic_ai_presentation.pptx`  
 **Duration**: 10 to 15 minutes (or concise 5-minute executive summary)  
-**Target Audience**: Structural Dynamics Faculty / Senior Researchers, IIT Delhi  
+**Target Audience**: Structural Dynamics & Earthquake Engineering Faculty / Senior Researchers  
 
 ---
 
@@ -46,6 +46,6 @@
 - **Speaker Point**: "We used the surrogate to optimize the lateral stiffness profile of a 5-storey building under the severe Kobe 1995 earthquake subject to a $1.0\%$ drift limit. Differential Evolution evaluated 1,050 candidate structures in just **$0.42\,\text{seconds}$**. Crucially, we re-simulated the optimal profile in the Phase 1 Newmark solver, confirming an exact true drift of **$0.70\% \le 1.0\%$**, proving zero AI hallucination."
 - **Key Emphasis**: The closed-loop verification is the critical safety bridge between AI and civil engineering.
 
-### Slide 12: Conclusions & Proposed Research at IIT Delhi
-- **Speaker Point**: "In conclusion, Seismic-AI demonstrates that physics-informed surrogates achieve $10^3 - 10^5\times$ speedup while preserving physical rigor. If given the opportunity to intern at IIT Delhi, I propose extending this work to non-linear hysteretic models (Bouc-Wen, fiber elements in OpenSeesPy), bi-directional orthogonal seismic loading, and regional building portfolio risk assessment."
+### Slide 12: Conclusions & Proposed Research Directions
+- **Speaker Point**: "In conclusion, Seismic-AI demonstrates that physics-informed surrogates achieve $10^3 - 10^5\times$ speedup while preserving physical rigor. If given the opportunity to join your laboratory as a research intern, I propose extending this work to 3D continuum neural operators (FNO), online Bayesian system identification for damage tracking, and low-power embedded edge acceleration."
 - **Key Emphasis**: Clearly state your future vision and readiness to contribute immediately to the professor's research group.
