@@ -61,14 +61,14 @@ graph LR
 ---
 
 ## 📑 Table of Contents
-- [⚡ The Life-Saving Lead-Time Pipeline](#-the-life-saving-lead-time-pipeline)
+- [⚡ Proposed Pipeline Architecture & Conceptual Lead Time](#-proposed-pipeline-architecture--conceptual-lead-time)
 - [🔬 Core Mathematical & Numerical Formulations](#-core-mathematical--numerical-formulations)
 - [🏗️ System Architecture & Decoupled Stack](#️-system-architecture--decoupled-stack)
 - [📸 Experimental Facilities & Hardware Instrumentation](#-experimental-facilities--hardware-instrumentation)
 - [🔌 Sensor Hardware Abstraction Layer (HAL) & Live Ingestion](#-sensor-hardware-abstraction-layer-hal--live-ingestion)
 - [📊 Scientific Benchmarks & Validation](#-scientific-benchmarks--validation)
 - [📋 3-Column Engineering Standards Audit](#-3-column-engineering-standards-audit)
-- [🔄 End-to-End System Execution Walkthrough](#-end-to-end-system-execution-walkthrough)
+- [🔄 Simulated End-to-End System Execution Walkthrough](#-simulated-end-to-end-system-execution-walkthrough)
 - [💻 10-Line Python SDK Quickstart](#-10-line-python-sdk-quickstart)
 - [🌐 Local Network Emergency Alarm Broadcast](#-local-network-emergency-alarm-broadcast)
 - [📂 Repository Architecture](#-repository-architecture)
@@ -77,11 +77,11 @@ graph LR
 
 ---
 
-## ⚡ The Life-Saving Lead-Time Pipeline
+## ⚡ Proposed Pipeline Architecture & Conceptual Lead Time
 
-Traditional earthquake early warning (EEW) regional networks rely on regional seismic arrays to triangulate epicenters, often broadcasting warnings *after* strong shaking has already begun at proximal sites. 
+Traditional earthquake early warning (EEW) regional networks typically rely on seismic arrays to triangulate epicenters, which can present latency challenges for sites in the near-fault region.
 
-**Seismic-AI** operates directly at the **facility level**: an on-site cyber-physical system continuously samples floor and foundation motions, detects primary compressional waves ($P$-waves) via recursive energy ratios in $<50\text{ ms}$, executes a physics-constrained neural surrogate in $<0.5\ \mu\text{s}$ ($>60,000\times$ faster than numerical ODE solvers), assesses non-linear structural damage using the Park-Ang metric, and broadcasts emergency siren and utility shutdown signals across local networks **10–30 seconds before destructive shear waves ($S$-waves) impact the superstructure**.
+**Seismic-AI** explores a **facility-level** concept: a prototype cyber-physical pipeline designed to sample foundation motions, detect primary compressional waves ($P$-waves) using recursive energy ratios (simulated algorithmic latency $<50\text{ ms}$), and estimate structural response via a physics-informed neural surrogate. In offline benchmarking, this surrogate executes a forward pass in $<0.5\ \mu\text{s}$ (demonstrating computational acceleration of approximately $60,000\times$ compared to the baseline numerical ODE solver). The pipeline integrates the Park-Ang metric to estimate non-linear structural damage. In simulated scenarios assuming favorable epicenter distances, this architecture aims to provide local warning signals prior to the arrival of high-amplitude shear waves ($S$-waves). End-to-end operational lead time and real-world EEW efficacy remain subject to future field validation.
 
 ```mermaid
 sequenceDiagram
@@ -97,17 +97,17 @@ sequenceDiagram
     Earth->>Sensor: Fast P-Wave Arrives (v ~ 5.5 km/s)
     Sensor->>DSP: Continuous Stream (ax, ay, az)
     DSP->>DSP: Bandpass (0.1-25 Hz) + Recursive Allen STA/LTA (r >= 3.5)
-    Note over DSP: Detection Latency < 50 ms
+    Note over DSP: Algorithmic Detection Latency < 50 ms
     DSP->>PINN: Trigger Latched (PGA, Dominant Freq, Duration)
     PINN->>PINN: Forward Pass (MDOF Peak Drift & Base Shear)
-    Note over PINN: Forward Inference < 0.5 μs (>60,000x Speedup)
+    Note over PINN: Surrogate Inference < 0.5 μs (~60,000x Solver Speedup)
     PINN->>Damage: Predict Drift (PIDR = 1.42%) & Cyclic Energy
     Damage->>Damage: Compute DI = 0.62 (Severe Damage State)
-    Damage->>Actuator: Trigger Emergency State (DI >= 0.40)
-    Actuator->>Actuator: Broadcast LAN Siren + Park Elevators + Shut Gas Valves
-    Note over Actuator: Full Evacuation Commenced (Lead Time ~ 14.15s)
+    Damage->>Actuator: Trigger Experimental Action Rule (DI >= 0.40)
+    Actuator->>Actuator: Dispatch LAN Alert & Relay Signals
+    Note over Actuator: Simulated Lead Time Commences
     Earth->>Waves: Destructive S-Wave Arrives (v ~ 3.1 km/s)
-    Note over Waves: Building Occupants Safe; Hazards Isolated
+    Note over Waves: Hypothetical scenario evaluation
 ```
 
 ---
@@ -175,10 +175,10 @@ Structural vulnerability is quantified through combined maximum deformation and 
 
 $$\text{DI} = \frac{u_m}{u_u} + \frac{\beta_{\text{PA}}}{Q_y u_u} \int dE_h$$
 
-- $\text{DI} < 0.20$: **Slight Damage / Operational** (Hairline concrete cracking; structure safe).
-- $0.20 \le \text{DI} < 0.40$: **Moderate Damage / Repairable** (Spalling of cover concrete; inspection required).
-- $0.40 \le \text{DI} < 0.80$: **Severe Damage / Inelastic Yielding** (Rebar buckling; **Mandatory Evacuation Triggered**).
-- $\text{DI} \ge 0.80$: **Imminent Collapse / Partial Collapse** (**Automated Siren & Utility Cutoff**).
+- $\text{DI} < 0.20$: **Slight Damage** (Typical experimental mapping: Hairline concrete cracking; structure generally operational).
+- $0.20 \le \text{DI} < 0.40$: **Moderate Damage** (Typical experimental mapping: Spalling of cover concrete; repairable).
+- $0.40 \le \text{DI} < 0.80$: **Severe Damage** (Experimental threshold used in simulations to trigger evacuation protocols).
+- $\text{DI} \ge 0.80$: **Critical Damage State** (Experimental threshold used in simulations to simulate automated utility cutoff).
 
 ---
 
@@ -324,11 +324,11 @@ driver.connect()
 ---
 
 ### 5. Computational Latency & Acceleration
-| Computational Method | Execution Time per Record | Acceleration Factor | Real-Time Feasibility |
+| Computational Method | Execution Time per Record | Acceleration Factor | Real-Time Inference Potential |
 | :--- | :---: | :---: | :---: |
-| Nonlinear Finite Element Solver (OpenSees) | $2,700\text{ ms}$ | $1.0\times$ (Baseline) | Infeasible ($> S\text{-wave lead time}$) |
+| Nonlinear Finite Element Solver (OpenSees) | $2,700\text{ ms}$ | $1.0\times$ (Baseline) | Computationally intensive for local warning |
 | Vectorized Python Newmark-$\beta$ Solver | $32.4\text{ ms}$ | $83\times$ | Marginal |
-| **Seismic-AI PINN Surrogate (Forward Pass)** | **$0.00048\text{ ms}$ ($0.48\ \mu\text{s}$)** | **$> 60,000\times$** | **Ideal ($< 1\text{ ms}$, real-time)** |
+| **Seismic-AI PINN Surrogate (Forward Pass)** | **$0.00048\text{ ms}$ ($0.48\ \mu\text{s}$)** | **$> 60,000\times$** | **Favorable ($< 1\text{ ms}$ inference latency)** |
 
 ---
 
@@ -372,13 +372,13 @@ The audit below demonstrates how prescriptive building codes (e.g. equivalent st
 
 | Building Case & Parameters | Column 1: Prescriptive Code | Column 2: High-Fidelity Physics Solver | Column 3: AI PINN Surrogate | Engineering Context & Insight |
 | :--- | :---: | :---: | :---: | :--- |
-| **5-Storey Residential Frame**<br>• $M = 580\text{ t}$, $T_1 = 0.524\text{ s}$<br>• Input: *Chamoli 1999 (0.36g)* | $V_B = 141.2\text{ kN}$<br>$\text{PIDR} = 0.118\%$ | $V_b = 1,842.5\text{ kN}$<br>$\text{PIDR} = 0.864\%$ | $V_b = 1,810.0\text{ kN}$<br>$\text{PIDR} = 0.858\%$ | Code underestimates unreduced elastic demand by $>10\times$. Surrogate matches physics solver within $0.7\%$ error. |
-| **8-Storey Commercial Frame**<br>• $M = 940\text{ t}$, $T_1 = 0.892\text{ s}$<br>• Input: *Bhuj 2001 (0.38g)* | $V_B = 342.8\text{ kN}$<br>$\text{PIDR} = 0.245\%$ | $V_b = 3,912.0\text{ kN}$<br>$\text{PIDR} = 1.412\%$ | $V_b = 3,850.0\text{ kN}$<br>$\text{PIDR} = 1.395\%$ | Captures higher-mode whipping and soft-soil resonance. Surrogate matches physics solver within $1.2\%$. |
-| **SAC 3-Story Steel Frame**<br>• $M = 300\text{ t}$, $T_1 = 1.012\text{ s}$<br>• Input: *Northridge (0.84g)* | $V_B = 80.2\text{ kN}$<br>$\text{PIDR} = 0.210\%$ | $V_b = 1,420.0\text{ kN}$<br>$\text{PIDR} = 1.820\%$ | $V_b = 1,405.0\text{ kN}$<br>$\text{PIDR} = 1.802\%$ | Near-fault velocity pulse excitation. Accurately reproduces published FEMA-355C benchmark values ($<1\%$ error). |
+| **5-Storey Residential Frame**<br>• $M = 580\text{ t}$, $T_1 = 0.524\text{ s}$<br>• Input: *Chamoli 1999 (0.36g)* | $V_B = 141.2\text{ kN}$<br>$\text{PIDR} = 0.118\%$ | $V_b = 1,842.5\text{ kN}$<br>$\text{PIDR} = 0.864\%$ | $V_b = 1,810.0\text{ kN}$<br>$\text{PIDR} = 0.858\%$ | Prescriptive values represent reduced design base shear. Physics solver calculates unreduced dynamic demand. Surrogate matches physics solver within $0.7\%$ discrepancy. |
+| **8-Storey Commercial Frame**<br>• $M = 940\text{ t}$, $T_1 = 0.892\text{ s}$<br>• Input: *Bhuj 2001 (0.38g)* | $V_B = 342.8\text{ kN}$<br>$\text{PIDR} = 0.245\%$ | $V_b = 3,912.0\text{ kN}$<br>$\text{PIDR} = 1.412\%$ | $V_b = 3,850.0\text{ kN}$<br>$\text{PIDR} = 1.395\%$ | Captures dynamic amplification effects. Surrogate matches physics solver within $1.2\%$ discrepancy. |
+| **SAC 3-Story Steel Frame**<br>• $M = 300\text{ t}$, $T_1 = 1.012\text{ s}$<br>• Input: *Northridge (0.84g)* | $V_B = 80.2\text{ kN}$<br>$\text{PIDR} = 0.210\%$ | $V_b = 1,420.0\text{ kN}$<br>$\text{PIDR} = 1.820\%$ | $V_b = 1,405.0\text{ kN}$<br>$\text{PIDR} = 1.802\%$ | Near-fault velocity pulse excitation. Closely aligns with published FEMA-355C benchmark values ($<1\%$ discrepancy). |
 
 ---
 
-## 🔄 End-to-End System Execution Walkthrough
+## 🔄 Simulated End-to-End System Execution Walkthrough
 
 ```
 1. CONTINUOUS MONITORING (t < 0)
@@ -387,29 +387,28 @@ The audit below demonstrates how prescriptive building codes (e.g. equivalent st
    • Background STA/LTA energy ratio hovers stably at ambient baseline (r ~ 1.0 - 1.2).
 
 2. COMPRESSIONAL P-WAVE ARRIVAL (t = 0.000 s)
-   • Non-destructive P-wave reaches structural foundation.
+   • P-wave reaches structural foundation.
    • STA energy window spikes; recursive STA/LTA ratio crosses trigger threshold (r >= 3.5) at t = +0.038 s.
    • Event timestamp, estimated PGA, and dominant frequency content latched in memory.
 
 3. PHYSICS-INFORMED SURROGATE INFERENCE (t = +0.039 s)
    • Vectorized feature vector constructed and passed to PINN neural surrogate.
-   • Forward inference finishes in 0.00048 ms (< 0.5 μs).
+   • Forward inference algorithmic latency measured at 0.00048 ms (< 0.5 μs).
    • Predicted responses: Peak Drift (PIDR = 1.42%) and Base Shear (V_b = 3,850 kN).
 
 4. DAMAGE ASSESSMENT & CONFORMAL BOUNDS (t = +0.040 s)
-   • Park-Ang cumulative index computed: DI = 0.62 (Severe Inelastic Yielding).
-   • Conformal uncertainty module verifies 95% guaranteed coverage interval [1.28%, 1.56%].
-   • Safety threshold triggered: DI >= 0.40 mandates EVACUATION STATE.
+   • Park-Ang cumulative index computed: DI = 0.62 (indicating severe damage potential).
+   • Conformal uncertainty module evaluates a 95% coverage interval [1.28%, 1.56%].
+   • Experimental action rule triggered: DI >= 0.40 initiates simulated evacuation state.
 
 5. LAN EMERGENCY SIREN & RELAY DISPATCH (t = +0.055 s)
-   • Emergency JSON payload dispatched via HTTP Webhook and duplex WebSockets across LAN.
-   • Connected browser dashboards sound audio chimes and display visual alert banners.
-   • Industrial relays triggered: elevators parked at ground floor, natural gas valves closed.
+   • JSON payload dispatched via HTTP Webhook and duplex WebSockets across LAN.
+   • Connected browser dashboards simulate audio chimes and display visual alerts.
+   • Simulated relay signals generated for theoretical elevator and gas valve control.
 
 6. DESTRUCTIVE S-WAVE ARRIVAL (t = +14.200 s)
-   • High-amplitude transverse shear waves strike building.
-   • Occupants already safely moving toward evacuation stairwells; fire hazards averted.
-   • Total Life-Saving Lead Time Achieved: 14.145 seconds.
+   • High-amplitude transverse shear waves strike the simulated site.
+   • In this hypothetical evaluation scenario, an algorithmic lead time of ~14.1 seconds is demonstrated prior to S-wave impact.
 ```
 
 ---
