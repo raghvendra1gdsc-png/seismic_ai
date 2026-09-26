@@ -1,4 +1,4 @@
-# 🏛️ Seismic-AI: Physics-Informed Neural Dynamics & Cyber-Physical Earthquake Early Warning
+# 🏛️ Seismic-AI: Physics-Informed Neural Dynamics & Cyber-Physical Early-Response Prototype
 
 <div align="center">
 
@@ -14,7 +14,9 @@
 [![Hardware HAL](https://img.shields.io/badge/sensors-USB%2FSerial%20MEMS%20%2B%20MQTT-lightgrey.svg)](src/sensors/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**An Open-Source Computational Structural Dynamics & Scientific Machine Learning Framework**  
+**A research prototype combining nonlinear structural dynamics, physics-based simulation, neural surrogate modeling, earthquake sensing, damage assessment, uncertainty estimation, and simulated early-response logic.**
+
+*A research prototype for low-latency P-wave detection, physics-based structural response estimation, neural surrogate modeling, and simulated early-response decision support.*  
 *Authored by **Raghvendra Singh Gahlot** (2nd Year B.Tech, Civil Engineering, MBM University)*  
 *Contact: `raghvendra1gdsc@gmail.com` | GitHub: [`@raghvendra1gdsc-png`](https://github.com/raghvendra1gdsc-png)*
 
@@ -68,7 +70,7 @@ graph LR
 - [🔌 Sensor Hardware Abstraction Layer (HAL) & Live Ingestion](#-sensor-hardware-abstraction-layer-hal--live-ingestion)
 - [📊 Scientific Benchmarks & Validation](#-scientific-benchmarks--validation)
 - [📋 3-Column Engineering Standards Audit](#-3-column-engineering-standards-audit)
-- [✅ Validation Status](#-validation-status)
+- [Validation Status](#validation-status)
 - [🔄 Simulated End-to-End System Execution Walkthrough](#-simulated-end-to-end-system-execution-walkthrough)
 - [💻 10-Line Python SDK Quickstart](#-10-line-python-sdk-quickstart)
 - [🌐 Local Network Emergency Alarm Broadcast](#-local-network-emergency-alarm-broadcast)
@@ -103,10 +105,10 @@ sequenceDiagram
     Note over DSP: Algorithmic Detection Latency < 50 ms
     DSP->>PINN: Trigger Latched (PGA, Dominant Freq, Duration)
     PINN->>PINN: Forward Pass (MDOF Peak Drift & Base Shear)
-    Note over PINN: Surrogate Inference < 0.5 μs (~60,000x Solver Speedup)
+    Note over PINN: Surrogate Inference < 0.5 μs (0.48 μs Forward Pass)
     PINN->>Damage: Predict Drift (PIDR = 1.42%) & Cyclic Energy
     Damage->>Damage: Compute DI = 0.62 (Severe Damage State)
-    Damage->>Actuator: Trigger Experimental Action Rule (DI >= 0.40)
+    Damage->>Actuator: Trigger Experimental High-Risk Decision Threshold (DI >= 0.40)
     Actuator->>Actuator: Dispatch LAN Alert & Relay Signals
     Note over Actuator: Simulated Lead Time Commences
     Earth->>Waves: Destructive S-Wave Arrives (v ~ 3.1 km/s)
@@ -169,7 +171,7 @@ $$\text{LTA}_k = c_{\text{lta}} \cdot \text{LTA}_{k-1} + (1 - c_{\text{lta}}) \c
 
 $$r_k = \frac{\text{STA}_k}{\text{LTA}_k}, \quad \text{Trigger Event if } r_k \ge 3.5$$
 
-Average detection latency is **$< 50\text{ ms}$**, ensuring maximum available lead time.
+Average algorithmic detection latency is **$< 50\text{ ms}$** under the tested conditions, minimizing processing delay within the available P-to-S interval.
 
 ---
 
@@ -180,10 +182,10 @@ $$\text{DI} = \frac{u_m}{u_u} + \frac{\beta_{\text{PA}}}{Q_y u_u} \int dE_h$$
 
 - $\text{DI} < 0.20$: **Slight Damage** (Typical experimental mapping: Hairline concrete cracking; structure generally operational).
 - $0.20 \le \text{DI} < 0.40$: **Moderate Damage** (Typical experimental mapping: Spalling of cover concrete; repairable).
-- $0.40 \le \text{DI} < 0.80$: **Experimental high-risk decision threshold**
-- $\text{DI} \ge 0.80$: **Experimental severe-damage threshold**
+- $\text{DI} \ge 0.40$: **Experimental High-Risk Decision Threshold** ($0.40 \le \text{DI} < 0.80$)
+- $\text{DI} \ge 0.80$: **Experimental Severe-Damage Threshold**
 
-*Note: These thresholds are research decision rules used in the simulated pipeline and should not be interpreted as validated life-safety, evacuation, or collapse-prediction criteria.*
+These thresholds are research decision rules used in the simulated pipeline and are not validated life-safety, evacuation, or collapse-prediction criteria.
 
 ---
 
@@ -330,8 +332,12 @@ driver.connect()
 
 ### 5. Computational Latency & Acceleration
 
-**Sub-millisecond neural inference in the reported benchmark.**
-*(PINN inference: $0.48\ \mu\text{s}$ vs. $2,700\text{ ms}$ for the reference nonlinear simulation)*
+#### Sub-millisecond neural inference in the reported benchmark
+
+- **PINN forward inference**: $0.48\ \mu\text{s}$ ($0.00048\text{ ms}$)
+- **Reference nonlinear simulation**: $2.7\text{ s}$ ($2,700\text{ ms}$)
+
+*This benchmark compares neural surrogate inference with the specified reference nonlinear simulation; it does not represent end-to-end system latency or field deployment performance.*
 
 | Computational Method | Execution Time per Record | Acceleration Factor | Real-Time Inference Potential |
 | :--- | :---: | :---: | :---: |
@@ -377,7 +383,7 @@ driver.connect()
 
 ## 📋 3-Column Engineering Standards Audit
 
-The audit below demonstrates how prescriptive building codes (e.g. equivalent static methods) compare against full nonlinear dynamic time-history simulation and the real-time AI surrogate:
+The audit below compares prescribed code-based calculations (e.g., equivalent static methods calibrated with design response reduction factors) against unreduced nonlinear dynamic time-history simulations and the neural surrogate for specific benchmark records:
 
 | Building Case & Parameters | Column 1: Prescriptive Code | Column 2: High-Fidelity Physics Solver | Column 3: AI PINN Surrogate | Engineering Context & Insight |
 | :--- | :---: | :---: | :---: | :--- |
@@ -387,12 +393,13 @@ The audit below demonstrates how prescriptive building codes (e.g. equivalent st
 
 ---
 
-## ✅ Validation Status
+## Validation Status
 
 The current system is a research prototype evaluated primarily through
 numerical simulation and controlled benchmark experiments.
 
 The reported results demonstrate:
+
 - low-latency neural inference,
 - physics-based structural simulation,
 - earthquake-event and structural generalization benchmarks,
@@ -424,7 +431,7 @@ assessment, or a guaranteed operational earthquake early-warning system.
 4. DAMAGE ASSESSMENT & CONFORMAL BOUNDS (t = +0.040 s)
    • Park-Ang cumulative index computed: DI = 0.62 (indicating severe damage potential).
    • Conformal uncertainty module evaluates a 95% coverage interval [1.28%, 1.56%].
-   • Experimental action rule triggered: DI >= 0.40 initiates simulated evacuation state.
+   • Experimental decision rule triggered: DI >= 0.40 reaches Experimental High-Risk Decision Threshold (initiating simulated alert state).
 
 5. LAN EMERGENCY SIREN & RELAY DISPATCH (t = +0.055 s)
    • JSON payload dispatched via HTTP Webhook and duplex WebSockets across LAN.
@@ -467,7 +474,7 @@ print(f"Peak Storey Drift: {resp.peak_displacement_m.max():.4f} m | Park-Ang Dam
 
 ## 🌐 Local Network Emergency Alarm Broadcast
 
-When running on a local workstation or Raspberry Pi, **any phone, tablet, or laptop on the same Wi-Fi or LAN** can access the live feed and receive instant emergency alarms:
+When running on a local workstation or test device (e.g., Raspberry Pi), **connected devices on the local network** can access the live telemetry stream and simulated alert feeds:
 
 ```bash
 # Terminal 1: Launch FastAPI Backend (accessible across LAN on port 8000)
@@ -478,8 +485,8 @@ streamlit run app/frontend/main.py --server.address 0.0.0.0 --server.port 8501
 ```
 
 - **Live Seismograph**: Real-time streaming oscillograph updating at $100\text{ Hz}$.
-- **Instant JSON Webhooks**: Sends automated alerts to local home automation systems, building relays, or industrial PLCs.
-- **Audio Chimes**: Automatically rings browser sirens on all connected smartphones when $r \ge 3.5$ and $\text{DI} \ge 0.40$.
+- **Simulated JSON Webhooks**: Dispatches event notifications to local services, test endpoints, or hardware relay interfaces.
+- **Simulated Audio Alert**: Demonstrates local browser chime notifications on connected test devices when $r \ge 3.5$ and $\text{DI} \ge 0.40$ (experimental high-risk threshold).
 
 ---
 
