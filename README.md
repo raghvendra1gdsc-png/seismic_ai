@@ -61,13 +61,14 @@ graph LR
 ---
 
 ## 📑 Table of Contents
-- [⚡ Proposed Pipeline Architecture & Conceptual Lead Time](#-proposed-pipeline-architecture--conceptual-lead-time)
+- [⚡ Proposed Pipeline Architecture & Simulated P-to-S Response Interval](#-proposed-pipeline-architecture--simulated-p-to-s-response-interval)
 - [🔬 Core Mathematical & Numerical Formulations](#-core-mathematical--numerical-formulations)
 - [🏗️ System Architecture & Decoupled Stack](#️-system-architecture--decoupled-stack)
 - [📸 Experimental Facilities & Hardware Instrumentation](#-experimental-facilities--hardware-instrumentation)
 - [🔌 Sensor Hardware Abstraction Layer (HAL) & Live Ingestion](#-sensor-hardware-abstraction-layer-hal--live-ingestion)
 - [📊 Scientific Benchmarks & Validation](#-scientific-benchmarks--validation)
 - [📋 3-Column Engineering Standards Audit](#-3-column-engineering-standards-audit)
+- [✅ Validation Status](#-validation-status)
 - [🔄 Simulated End-to-End System Execution Walkthrough](#-simulated-end-to-end-system-execution-walkthrough)
 - [💻 10-Line Python SDK Quickstart](#-10-line-python-sdk-quickstart)
 - [🌐 Local Network Emergency Alarm Broadcast](#-local-network-emergency-alarm-broadcast)
@@ -77,11 +78,13 @@ graph LR
 
 ---
 
-## ⚡ Proposed Pipeline Architecture & Conceptual Lead Time
+## ⚡ Proposed Pipeline Architecture & Simulated P-to-S Response Interval
+
+*The reported lead time is a simulated P-to-S arrival interval for the benchmark scenario; it is not a field-validated end-to-end earthquake early-warning guarantee.*
 
 Traditional earthquake early warning (EEW) regional networks typically rely on seismic arrays to triangulate epicenters, which can present latency challenges for sites in the near-fault region.
 
-**Seismic-AI** explores a **facility-level** concept: a prototype cyber-physical pipeline designed to sample foundation motions, detect primary compressional waves ($P$-waves) using recursive energy ratios (simulated algorithmic latency $<50\text{ ms}$), and estimate structural response via a physics-informed neural surrogate. In offline benchmarking, this surrogate executes a forward pass in $<0.5\ \mu\text{s}$ (demonstrating computational acceleration of approximately $60,000\times$ compared to the baseline numerical ODE solver). The pipeline integrates the Park-Ang metric to estimate non-linear structural damage. In simulated scenarios assuming favorable epicenter distances, this architecture aims to provide local warning signals prior to the arrival of high-amplitude shear waves ($S$-waves). End-to-end operational lead time and real-world EEW efficacy remain subject to future field validation.
+**Seismic-AI** explores a **facility-level** concept: a prototype cyber-physical pipeline designed to detect P-wave arrivals with low-latency processing, estimate structural response and damage-related indicators using physics-based and learned models, and demonstrate an on-site early-response pipeline using simulated earthquake scenarios. In offline benchmarking, the physics-informed neural surrogate achieves sub-millisecond neural inference ($0.48\ \mu\text{s}$ vs. $2,700\text{ ms}$ for the reference nonlinear simulation).
 
 ```mermaid
 sequenceDiagram
@@ -177,8 +180,10 @@ $$\text{DI} = \frac{u_m}{u_u} + \frac{\beta_{\text{PA}}}{Q_y u_u} \int dE_h$$
 
 - $\text{DI} < 0.20$: **Slight Damage** (Typical experimental mapping: Hairline concrete cracking; structure generally operational).
 - $0.20 \le \text{DI} < 0.40$: **Moderate Damage** (Typical experimental mapping: Spalling of cover concrete; repairable).
-- $0.40 \le \text{DI} < 0.80$: **Severe Damage** (Experimental threshold used in simulations to trigger evacuation protocols).
-- $\text{DI} \ge 0.80$: **Critical Damage State** (Experimental threshold used in simulations to simulate automated utility cutoff).
+- $0.40 \le \text{DI} < 0.80$: **Experimental high-risk decision threshold**
+- $\text{DI} \ge 0.80$: **Experimental severe-damage threshold**
+
+*Note: These thresholds are research decision rules used in the simulated pipeline and should not be interpreted as validated life-safety, evacuation, or collapse-prediction criteria.*
 
 ---
 
@@ -324,6 +329,10 @@ driver.connect()
 ---
 
 ### 5. Computational Latency & Acceleration
+
+**Sub-millisecond neural inference in the reported benchmark.**
+*(PINN inference: $0.48\ \mu\text{s}$ vs. $2,700\text{ ms}$ for the reference nonlinear simulation)*
+
 | Computational Method | Execution Time per Record | Acceleration Factor | Real-Time Inference Potential |
 | :--- | :---: | :---: | :---: |
 | Nonlinear Finite Element Solver (OpenSees) | $2,700\text{ ms}$ | $1.0\times$ (Baseline) | Computationally intensive for local warning |
@@ -372,9 +381,25 @@ The audit below demonstrates how prescriptive building codes (e.g. equivalent st
 
 | Building Case & Parameters | Column 1: Prescriptive Code | Column 2: High-Fidelity Physics Solver | Column 3: AI PINN Surrogate | Engineering Context & Insight |
 | :--- | :---: | :---: | :---: | :--- |
-| **5-Storey Residential Frame**<br>• $M = 580\text{ t}$, $T_1 = 0.524\text{ s}$<br>• Input: *Chamoli 1999 (0.36g)* | $V_B = 141.2\text{ kN}$<br>$\text{PIDR} = 0.118\%$ | $V_b = 1,842.5\text{ kN}$<br>$\text{PIDR} = 0.864\%$ | $V_b = 1,810.0\text{ kN}$<br>$\text{PIDR} = 0.858\%$ | Prescriptive values represent reduced design base shear. Physics solver calculates unreduced dynamic demand. Surrogate matches physics solver within $0.7\%$ discrepancy. |
+| **5-Storey Residential Frame**<br>• $M = 580\text{ t}$, $T_1 = 0.524\text{ s}$<br>• Input: *Chamoli 1999 (0.36g)* | $V_B = 141.2\text{ kN}$<br>$\text{PIDR} = 0.118\%$ | $V_b = 1,842.5\text{ kN}$<br>$\text{PIDR} = 0.864\%$ | $V_b = 1,810.0\text{ kN}$<br>$\text{PIDR} = 0.858\%$ | For the evaluated scenario, the prescribed code-based calculation produced substantially lower demand than the nonlinear time-history benchmark. Surrogate matches physics solver within $0.7\%$ discrepancy. |
 | **8-Storey Commercial Frame**<br>• $M = 940\text{ t}$, $T_1 = 0.892\text{ s}$<br>• Input: *Bhuj 2001 (0.38g)* | $V_B = 342.8\text{ kN}$<br>$\text{PIDR} = 0.245\%$ | $V_b = 3,912.0\text{ kN}$<br>$\text{PIDR} = 1.412\%$ | $V_b = 3,850.0\text{ kN}$<br>$\text{PIDR} = 1.395\%$ | Captures dynamic amplification effects. Surrogate matches physics solver within $1.2\%$ discrepancy. |
 | **SAC 3-Story Steel Frame**<br>• $M = 300\text{ t}$, $T_1 = 1.012\text{ s}$<br>• Input: *Northridge (0.84g)* | $V_B = 80.2\text{ kN}$<br>$\text{PIDR} = 0.210\%$ | $V_b = 1,420.0\text{ kN}$<br>$\text{PIDR} = 1.820\%$ | $V_b = 1,405.0\text{ kN}$<br>$\text{PIDR} = 1.802\%$ | Near-fault velocity pulse excitation. Closely aligns with published FEMA-355C benchmark values ($<1\%$ discrepancy). |
+
+---
+
+## ✅ Validation Status
+
+The current system is a research prototype evaluated primarily through
+numerical simulation and controlled benchmark experiments.
+
+The reported results demonstrate:
+- low-latency neural inference,
+- physics-based structural simulation,
+- earthquake-event and structural generalization benchmarks,
+- P-wave detection and simulated early-response logic.
+
+They do not constitute field validation, certified structural-health
+assessment, or a guaranteed operational earthquake early-warning system.
 
 ---
 
